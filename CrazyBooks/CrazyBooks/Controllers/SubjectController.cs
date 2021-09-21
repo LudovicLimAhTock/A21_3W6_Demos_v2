@@ -1,5 +1,5 @@
-﻿using CrazyBooks.Models;
-using CrazyBooks.Models.Data;
+﻿using CrazyBooks_Models.Models;
+using CrazyBooks_DataAccess;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;

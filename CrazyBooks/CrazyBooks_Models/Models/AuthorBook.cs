@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CrazyBooks.Models
+namespace CrazyBooks_Models.Models
 {
   public class AuthorBook
   { // Relation 1 à plusieurs, obligatoire

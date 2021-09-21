@@ -1,6 +1,6 @@
 using System;
 
-namespace CrazyBooks.Models
+namespace CrazyBooks_Models.Models
 {
   public class ErrorViewModel
   {

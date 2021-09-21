@@ -19,4 +19,9 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\CrazyBooks_DataAccess\CrazyBooks_DataAccess.csproj" />
+    <ProjectReference Include="..\CrazyBooks_Models\CrazyBooks_Models.csproj" />
+  </ItemGroup>
+
 </Project>
