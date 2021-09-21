@@ -7,16 +7,16 @@ using System.Threading.Tasks;
 
 namespace CrazyBooks.Controllers
 {
-  public class SubjectController : Controller
+  public class BookController : Controller
   {
     public IActionResult Index()
     {
-      this.ViewBag.MaListe = new List<Subject>()
+      this.ViewBag.MaListe = new List<Book>()
       {
-        new Subject(){Name= "Thriller", Id=1},
-        new Subject(){Name= "Biographie", Id=2},
-        new Subject(){Name= "Drame", Id=3},
-        new Subject(){Name= "Ressources humaines", Id=4}
+        new Book(){ Id=1, Title= "Cobayes", ISBN= "9782896623921"},
+        new Book(){Id=2, Title= "Enlèvement", ISBN= "9782896626151" },
+        new Book(){Id=3, Title= "Le chiffreur", ISBN= "9782890747364" },
+        new Book(){Id=4, Title= "Les Maudits", ISBN= "9782896628773"}
       };
       return View();
     }
@@ -29,14 +29,14 @@ namespace CrazyBooks.Controllers
 
     //POST CREATE
     [HttpPost]
-    public IActionResult Create(Subject subject)
+    public IActionResult Create(Book book)
     {
       if (ModelState.IsValid)
       {
         // Ajouter à la BD
       }
 
-      return this.View(subject);
+      return this.View(book);
     }
   }
 }
