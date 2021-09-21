@@ -37,6 +37,7 @@ namespace CrazyBooks.Models
     //Propriété de navigation 1 à plusieurs, côté 1
     public Publisher Publisher { get; set; }
 
-  
+    //Propriété de navigation 1 à plusieurs, côté plusieurs
+    public ICollection<AuthorBook> AuthorsBooks { get; set; }
   }
 }

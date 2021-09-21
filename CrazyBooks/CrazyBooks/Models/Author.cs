@@ -22,5 +22,7 @@ namespace CrazyBooks.Models
     //Propriété de navigation 1 à 1
     public AuthorDetail AuthorDetail { get; set; }
 
+    //Propriété de navigation 1 à plusieurs, côté plusieurs
+    public ICollection<AuthorBook> AuthorsBooks { get; set; }
   }
 }
