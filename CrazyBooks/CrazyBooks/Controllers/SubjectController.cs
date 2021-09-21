@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CrazyBooks_DataAccess.Data;
 
 namespace CrazyBooks.Controllers
 {

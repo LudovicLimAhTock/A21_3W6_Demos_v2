@@ -1,4 +1,7 @@
 using CrazyBooks_DataAccess;
+using CrazyBooks_DataAccess.Data;
+using CrazyBooks_DataAccess.Repository;
+using CrazyBooks_DataAccess.Repository.IRepository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -28,6 +31,8 @@ namespace CrazyBooks
       services.AddDbContext<CrazyBooksDbContext>(options =>
       options.UseSqlServer(
         Configuration.GetConnectionString("DefaultConnection")));
+
+      services.AddScoped<IUnitOfWork, UnitOfWork>();
 
       services.AddControllersWithViews().AddRazorRuntimeCompilation();
     }
