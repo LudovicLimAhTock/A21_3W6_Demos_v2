@@ -10,8 +10,12 @@ namespace CrazyBooks.Models.Data
   {
     public CrazyBooksDbContext(DbContextOptions<CrazyBooksDbContext> options) : base(options)
     {
-
+      
     }
-
+    public DbSet<Book> Book { get; set; }
+    public DbSet<Subject> Subject { get; set; }
+    public DbSet<Publisher> Publisher { get; set; }
+    public DbSet<Author> Author { get; set; }
+    public DbSet<AuthorDetail> AuthorDetail { get; set; }
   }
 }
