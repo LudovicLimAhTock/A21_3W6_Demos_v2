@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CrazyBooks_DataAccess
+namespace CrazyBooks_DataAccess.Data
 {
   public class CrazyBooksDbContext: DbContext
   {
