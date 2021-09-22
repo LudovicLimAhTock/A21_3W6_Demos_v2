@@ -39,6 +39,8 @@ namespace CrazyBooks.Controllers
       if (ModelState.IsValid)
       {
         // Ajouter à la BD
+        _db.Add(subject);
+        _db.SaveChanges();
       }
 
       return this.View(subject);
