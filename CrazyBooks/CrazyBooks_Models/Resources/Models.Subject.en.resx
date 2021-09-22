@@ -117,14 +117,8 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="MinMaxCaractersValidation" xml:space="preserve">
-    <value>{0} must have  {1} to {2} characters.</value>
-  </data>
   <data name="Name" xml:space="preserve">
     <value>Subject</value>
-  </data>
-  <data name="RequiredValidation" xml:space="preserve">
-    <value>{0} is required.</value>
   </data>
   <data name="Subject" xml:space="preserve">
     <value>Subject</value>
