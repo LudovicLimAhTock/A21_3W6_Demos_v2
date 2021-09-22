@@ -7,30 +7,31 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CrazyBooks_DataAccess.Data;
+using CrazyBooks_DataAccess.Repository.IRepository;
 
 namespace CrazyBooks.Controllers
 {
   public class SubjectController : Controller
   {
-    private readonly CrazyBooksDbContext _db;
+    private readonly IUnitOfWork _unitOfWork;
     private readonly ILogger<SubjectController> _logger;
 
-    public SubjectController(CrazyBooksDbContext db, ILogger<SubjectController> logger)
+    public SubjectController(IUnitOfWork unitOfWork, ILogger<SubjectController> logger)
     {
-      _db = db;
+      _unitOfWork = unitOfWork;
+      _logger = logger;
     }
     public IActionResult Index()
     {
-      //Sans Repository Patterns: Redéfini à chaque fois
-      List<Subject> objList = _db.Subject.ToList();
+      IEnumerable<Subject> SubjectList = _unitOfWork.Subject.GetAll();
 
-      return View(objList);
+      return View(SubjectList);
     }
 
     //GET CREATE
     public IActionResult Create()
     {
-      return View();
+     return View();
     }
 
     //POST CREATE
@@ -40,8 +41,11 @@ namespace CrazyBooks.Controllers
       if (ModelState.IsValid)
       {
         // Ajouter à la BD
+        _unitOfWork.Subject.Add(subject);
+     
+        _unitOfWork.Save();
+        return RedirectToAction(nameof(Index));
       }
-
       return this.View(subject);
     }
   }

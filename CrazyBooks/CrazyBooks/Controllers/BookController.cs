@@ -1,5 +1,9 @@
-﻿using CrazyBooks_Models.Models;
+﻿using CrazyBooks_DataAccess.Repository.IRepository;
+using CrazyBooks_Models.Models;
+using CrazyBooks_Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,34 +13,54 @@ namespace CrazyBooks.Controllers
 {
   public class BookController : Controller
   {
+    private readonly IUnitOfWork _unitOfWork;
+    private readonly ILogger<SubjectController> _logger;
+
+    public BookController(IUnitOfWork unitOfWork, ILogger<SubjectController> logger)
+    {
+      _unitOfWork = unitOfWork;
+      _logger = logger;
+    }
     public IActionResult Index()
     {
-      this.ViewBag.MaListe = new List<Book>()
-      {
-        new Book(){ Id=1, Title= "Cobayes", ISBN= "9782896623921"},
-        new Book(){Id=2, Title= "Enlèvement", ISBN= "9782896626151" },
-        new Book(){Id=3, Title= "Le chiffreur", ISBN= "9782890747364" },
-        new Book(){Id=4, Title= "Les Maudits", ISBN= "9782896628773"}
-      };
-      return View();
+      IEnumerable<Book> objList = _unitOfWork.Book.GetAll(includeProperties:"Publisher,Subject");
+
+      return View(objList);
     }
 
     //GET CREATE
     public IActionResult Create()
     {
-      return View();
+      BookVM bookVM = new BookVM()
+      {
+        Book = new Book(),
+        SubjectList = _unitOfWork.Subject.GetAll().Select(i => new SelectListItem
+        {
+          Text = i.Name,
+          Value = i.Id.ToString()
+        }),
+        PublisherList = _unitOfWork.Publisher.GetAll().Select(i => new SelectListItem
+        {
+          Text = i.Name,
+          Value = i.Id.ToString()
+        })
+      };
+      return View(bookVM);
     }
 
     //POST CREATE
     [HttpPost]
-    public IActionResult Create(Book book)
+    [ValidateAntiForgeryToken]
+    public IActionResult Create(BookVM bookVM)
     {
       if (ModelState.IsValid)
       {
         // Ajouter à la BD
+        _unitOfWork.Book.Add(bookVM.Book);
       }
 
-      return this.View(book);
+      _unitOfWork.Save();
+      return RedirectToAction(nameof(Index));
     }
   }
 }
