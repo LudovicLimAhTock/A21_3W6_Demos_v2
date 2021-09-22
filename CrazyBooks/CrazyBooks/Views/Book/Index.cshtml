@@ -18,12 +18,12 @@
     <table class="table table-bordered table-striped border-primary" style="width:100%">
       <thead class="bg-primary">
         <tr>
-          <th>Title</th>
-          <th>ISBN</th>
-          <th>Price</th>
-          <th>Subject</th>
-          <th>Publisher</th>
-          <th>Speciality</th>
+          <th> @Html.DisplayNameFor(model => model.Title)</th>
+          <th> @Html.DisplayNameFor(model => model.ISBN)</th>
+          <th> @Html.DisplayNameFor(model => model.Price)</th>
+          <th> @Html.DisplayNameFor(model => model.Subject.Name)</th>
+          <th> @Html.DisplayNameFor(model => model.Publisher.Name)</th>
+          <th> @Html.DisplayNameFor(model => model.Publisher.Speciality)</th>
           <th></th>
         </tr>
       </thead>

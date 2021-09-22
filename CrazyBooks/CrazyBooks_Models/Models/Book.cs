@@ -11,16 +11,19 @@ namespace CrazyBooks_Models.Models
   {
     [Key]
     public int Id { get; set; }
-    
-    [Required]
-    [MaxLength(30)]
+
+    [Display(Name = "Title")]
+    [Required(AllowEmptyStrings = false, ErrorMessage = "RequiredValidation")]
+    [MaxLength(30, ErrorMessage = "MaxLengthValidation")]
     public string Title { get; set; }
-    
-    [Required]
-    [MaxLength(15)]
+
+    [Display(Name = "ISBN")]
+    [Required(AllowEmptyStrings = false, ErrorMessage = "RequiredValidation")]
+    [MaxLength(15, ErrorMessage = "MaxLengthValidation")]
     public string ISBN { get; set; }
-    
-    [Required]
+
+    [Display(Name = "Price")]
+    [Required(AllowEmptyStrings = false, ErrorMessage = "RequiredValidation")]
     [Column(TypeName = "decimal(10,2)")]
     [DisplayFormat(DataFormatString = "{0:c2}")] // Monetaire (currency)
     public double Price { get; set; }
