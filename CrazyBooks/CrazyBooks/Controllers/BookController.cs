@@ -14,9 +14,9 @@ namespace CrazyBooks.Controllers
   public class BookController : Controller
   {
     private readonly IUnitOfWork _unitOfWork;
-    private readonly ILogger<SubjectController> _logger;
+    private readonly ILogger<BookController> _logger;
 
-    public BookController(IUnitOfWork unitOfWork, ILogger<SubjectController> logger)
+    public BookController(IUnitOfWork unitOfWork, ILogger<BookController> logger)
     {
       _unitOfWork = unitOfWork;
       _logger = logger;
