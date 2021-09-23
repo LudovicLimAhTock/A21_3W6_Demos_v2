@@ -39,24 +39,28 @@ namespace AppDependencyInject_Lab
       });
 
             services.AddTransient<IZombieForecaster, ZombieForecaster>();
-      #region Enregistrer le service ZombieForcaster version 1
+            services.Configure<WazeForecastSettings>(Configuration.GetSection("WazeForecast"));
+            services.Configure<StripeSettings>(Configuration.GetSection("Stripe"));
+            services.Configure<TwilioSettings>(Configuration.GetSection("Twilio"));
 
-      #endregion
+            #region Enregistrer le service ZombieForcaster version 1
 
-      #region Insérez les références à l'ensemble des services ThirdParty ici Version Séparément
+            #endregion
+
+            #region Insérez les références à l'ensemble des services ThirdParty ici Version Séparément
 
 
-      #endregion
+            #endregion
 
-      #region Insérez les références à l'ensemble des services Thirdparty ici Version Groupés
+            #region Insérez les références à l'ensemble des services Thirdparty ici Version Groupés
 
-      #endregion
+            #endregion
 
-      #region Injection des trois version du Middleware
-     
-      #endregion
+            #region Injection des trois version du Middleware
 
-      services.AddControllersWithViews().AddRazorRuntimeCompilation();
+            #endregion
+
+            services.AddControllersWithViews().AddRazorRuntimeCompilation();
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

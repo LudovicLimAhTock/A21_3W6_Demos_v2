@@ -3,6 +3,9 @@ using Microsoft.AspNetCore.Mvc;
 using AppDependencyInject_Lab.Models;
 using AppDependencyInject_Lab.Models.ViewModels;
 using AppDependencyInject_Lab.Service;
+using AppDependencyInject_Lab.Utility.AppSettingsClasses;
+using Microsoft.Extensions.Options;
+using System.Collections.Generic;
 
 namespace AppDependencyInject_Lab.Controllers
 {
@@ -10,6 +13,10 @@ namespace AppDependencyInject_Lab.Controllers
   {
     public HomeVM homeVM { get; set; }
     private readonly IZombieForecaster _zombieForecaster;
+        private readonly StripeSettings _stripeOptions;
+        private readonly TwilioSettings _twilioOptions;
+        private readonly WazeForecastSettings _wazeOptions;
+
         // Ajouter la propriété du ZombieForecaster ici version 1
 
 
@@ -19,12 +26,18 @@ namespace AppDependencyInject_Lab.Controllers
 
 
 
-        public HomeController(IZombieForecaster zombieForecaster)
-    {
+        public HomeController(IOptions<WazeForecastSettings> wazeOptions,
+        IOptions<TwilioSettings> twilioOptions,
+        IOptions<StripeSettings> stripeOptions, IZombieForecaster zombieForecaster
+)
+        {
       homeVM = new HomeVM();
             _zombieForecaster = zombieForecaster;
+            _stripeOptions = stripeOptions.Value;
+            _twilioOptions = twilioOptions.Value;
+            _wazeOptions = wazeOptions.Value;
 
-    }
+        }
 
 
     public IActionResult Index()
@@ -52,12 +65,23 @@ namespace AppDependencyInject_Lab.Controllers
             return View(homeVM);
     }
 
-    #region Action AllConfigSetting version du constructeur muli-services
-   
+        #region Action AllConfigSetting version du constructeur muli-services
+        public IActionResult AllConfigSettings()
+        {
+            List<string> messages = new List<string>();
+            messages.Add($"Waze config - Forecast tracker : " + _wazeOptions.WazeTrackerEnabled);
+            messages.Add($"Stripe Publishable key : " + _stripeOptions.PublishableKey);
+            messages.Add($"Stripe Secret key : " + _stripeOptions.SecretKey);
+            messages.Add($"Twilio Phone : " + _twilioOptions.PhoneNumber);
+            messages.Add($"Twilio SID : " + _twilioOptions.AccountSid);
+            messages.Add($"Twilio Token : " + _twilioOptions.AuthToken);
+            return View(messages);
+        }
 
-    #endregion
 
-    public IActionResult Privacy()
+        #endregion
+
+        public IActionResult Privacy()
     {
       return View();
     }
